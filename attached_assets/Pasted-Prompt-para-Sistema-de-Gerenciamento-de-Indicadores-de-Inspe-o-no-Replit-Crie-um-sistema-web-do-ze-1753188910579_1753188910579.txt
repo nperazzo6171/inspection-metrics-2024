@@ -1,0 +1,197 @@
+Prompt para Sistema de Gerenciamento de Indicadores de Inspeção no Replit
+Crie um sistema web do zero para gerenciamento de indicadores de inspeção com base em um conjunto de dados fornecido, utilizando tecnologias web modernas compatíveis com o Replit. O sistema deve incluir login seguro para administradores, dashboards interativos, filtros e geração de relatórios em PDF. Abaixo estão os requisitos detalhados:
+Requisitos do Sistema:
+
+Integração do Conjunto de Dados:
+
+Utilize o conjunto de dados fornecido (uma representação CSV de um arquivo Excel com dados de inspeção). O conjunto de dados inclui as colunas: Nº, Unidade Inspecionada, Departamento, COORPIN, Data da Inspeção, Delegado Corregedor Responsável, Não Conformidade Identificada, Descrição da Não Conformidade Identificada, Providências (Iniciais, Intermediárias, Conclusivas), Data Início Prazo Regularização, Dias Prazo, Data Fim para Regularização, Status Prazo para Regularização, Data Determinada para Nova Inspeção, Criticidade.
+Parseie os dados CSV usando a biblioteca PapaParse, garantindo tratamento robusto de anormalidades (por exemplo, linhas vazias, tipos de dados inválidos).
+Converta datas seriais do Excel (por exemplo, 45560) em objetos JavaScript Date usando a biblioteca chrono-node para manipulação precisa de datas.
+
+
+Frontend:
+
+Construa uma aplicação de página única (SPA) usando React 18 com JSX (via CDN de cdn.jsdelivr.net), transformada em tempo de execução com Babel.
+Estilize a aplicação com Tailwind CSS (via CDN) para um design moderno, limpo e responsivo com cores ricas.
+Use a biblioteca Recharts (via CDN) para gráficos interativos (por exemplo, gráficos de barras, linhas e pizza) envoltos em ResponsiveContainer para design responsivo.
+Defina o tamanho da fonte como 12 para componentes Recharts e garanta que os eixos sejam rotulados.
+Evite tags <form> devido a restrições de sandbox; use manipuladores onClick para interações.
+Inclua o brasão da Polícia Civil: Adicione uma imagem do brasão da Polícia Civil da Bahia (disponível em https://www.policiacivil.ba.gov.br/images/logo.png ou similar, se permitido) no cabeçalho de todas as páginas (por exemplo, como um logo no canto superior esquerdo da barra de navegação). Ajuste o tamanho para 50px de altura usando Tailwind CSS.
+
+
+Autenticação:
+
+Implemente uma página de login segura para administradores exigindo nome de usuário e senha.
+Use uma verificação de credenciais simples e codificada no backend (por exemplo, usuário: admin, senha: correpol2025) para simplicidade. Em um ambiente de produção, isso deve ser substituído por um sistema de autenticação adequado.
+Redirecione usuários autenticados para o dashboard principal; usuários não autenticados devem permanecer na página de login.
+
+
+Dashboards e Navegação:
+
+Crie um dashboard principal com uma barra de navegação contendo abas para:
+Dashboard Geral: Resumo das inspeções (por exemplo, total de inspeções, não conformidades por departamento, status dos prazos).
+Galeria: Representação visual dos dados (por exemplo, imagens ou placeholders para visuais relacionados às inspeções, se disponíveis).
+Prazos: Acompanhe os prazos de regularização (Data Fim para Regularização, Status Prazo para Regularização).
+Normalização: Exiba conformidade com normas (por exemplo, não conformidades como "Ausência de Livro Obrigatório" ou "Não conformidade com Portaria 494/2023").
+
+
+Cada aba deve conter visualizações interativas (por exemplo, gráficos de barras para não conformidades por unidade, gráficos de pizza para distribuição por criticidade).
+Inclua filtros interativos nas abas para:
+Unidade Inspecionada (seleção múltipla via dropdown).
+Departamento (seleção múltipla via dropdown).
+Não Conformidade Identificada (seleção múltipla).
+Data da Inspeção (intervalo de datas com um seletor de data).
+
+
+Os filtros devem atualizar os gráficos dinamicamente usando estados do React.
+
+
+Backend:
+
+Implemente um backend simples usando Node.js com Express no Replit para gerenciar autenticação e fornecer dados ao frontend.
+Armazene os dados do CSV em memória ou em um banco de dados leve como SQLite (compatível com Replit) para consultas rápidas.
+Crie endpoints API RESTful para:
+Autenticação (/api/login).
+Recuperação de dados filtrados (/api/inspections com parâmetros para filtros).
+Geração de relatórios em PDF (/api/reports).
+
+
+Inclua o brasão da Polícia Civil: Adicione o brasão da Polícia Civil da Bahia como parte do cabeçalho dos relatórios gerados (por exemplo, como uma imagem incorporada no PDF usando jsPDF).
+
+
+Geração de Relatórios em PDF:
+
+Use a biblioteca jsPDF (via CDN) para gerar relatórios em PDF no frontend, com base nos dados filtrados.
+Inclua botões nas abas do dashboard para gerar relatórios em PDF com base em:
+Período (intervalo de datas da inspeção).
+Departamento (seleção de um ou mais departamentos).
+Unidade Inspecionada (seleção de uma ou mais unidades).
+Não Conformidade (seleção de tipos específicos de não conformidades).
+Prazo (status do prazo, por exemplo, "Dentro do prazo", ou por intervalo de Data Fim para Regularização).
+
+
+Os relatórios devem incluir:
+Cabeçalho com título "Relatório Produzido pela ASTEC - CORREPOL", data de geração, filtros aplicados e o brasão da Polícia Civil.
+Tabela com colunas relevantes do conjunto de dados (ex.: Unidade Inspecionada, Não Conformidade Identificada, Providências, Data Fim para Regularização, Status Prazo para Regularização).
+Gráficos exportados como imagens (usando Recharts) incorporados no PDF.
+Resumo estatístico (por exemplo, total de não conformidades, distribuição por criticidade).
+
+
+Os PDFs devem ser baixados automaticamente ao clicar nos botões de geração de relatórios.
+
+
+Galeria:
+
+Crie uma aba "Galeria" com uma grade de cards (usando Tailwind CSS) exibindo visualizações ou placeholders para cada inspeção.
+Cada card deve mostrar:
+Nome da unidade inspecionada.
+Data da inspeção.
+Não conformidade identificada.
+Imagem genérica (placeholder, por exemplo, um ícone de inspeção) ou imagens reais, se fornecidas no futuro.
+
+
+Permita filtragem dos cards com base nos mesmos filtros do dashboard (unidade, departamento, etc.).
+
+
+Prazos e Normalização:
+
+Na aba "Prazos", exiba uma tabela interativa com colunas para Unidade Inspecionada, Data Fim para Regularização, Status Prazo para Regularização e Dias Restantes (calculados dinamicamente com base na data atual: 22/07/2025 às 09:48 AM -03).
+Use cores para destacar status (por exemplo, verde para "Dentro do prazo", vermelho para prazos expirados).
+Na aba "Normalização", mostre um relatório de conformidade com normas, destacando não conformidades como "Ausência de Livro Obrigatório" ou "Não conformidade com Portaria 494/2023", com gráficos de barras indicando frequência por tipo de não conformidade.
+
+
+Funcionalidades Adicionais:
+
+Adicione um botão de logout na barra de navegação para retornar à página de login.
+Garanta que a interface seja responsiva, funcionando bem em dispositivos móveis e desktops.
+Inclua mensagens de erro amigáveis para falhas de autenticação ou consultas de dados inválidas.
+Use ícones do FontAwesome (via CDN) para botões e elementos visuais.
+
+
+Estrutura do Projeto no Replit:
+
+Crie os seguintes arquivos:
+index.html: Ponto de entrada com CDNs para React, Babel, Tailwind CSS, Recharts, PapaParse, chrono-node, jsPDF e FontAwesome.
+src/App.jsx: Componente principal do React com roteamento para abas (usando react-router-dom via CDN, se necessário).
+server.js: Backend Node.js com Express para APIs.
+data/inspections.csv: Arquivo CSV com os dados da planilha fornecida.
+src/components/: Pasta com componentes React para Login, Dashboard, Gallery, Deadlines, Normalization.
+
+
+Configure o Replit para executar o backend (server.js) e servir o frontend (index.html).
+
+
+Exemplo de Estrutura de Código:
+
+index.html:<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Gerenciamento de Inspeções</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7/babel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/recharts@2.12.7/umd/Recharts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chrono-node@2.7.7/dist/chrono.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/js/all.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="src/App.jsx"></script>
+</body>
+</html>
+
+
+server.js:const express = require('express');
+const app = express();
+const fs = require('fs');
+const Papa = require('papaparse');
+
+app.use(express.json());
+
+app.post('/api/login', (req, res) => {
+  const { username, password } = req.body;
+  if (username === 'admin' && password === 'correpol2025') {
+    res.json({ success: true });
+  } else {
+    res.status(401).json({ success: false, message: 'Credenciais inválidas' });
+  }
+});
+
+app.get('/api/inspections', (req, res) => {
+  const file = fs.readFileSync('./data/inspections.csv', 'utf8');
+  Papa.parse(file, {
+    header: true,
+    complete: (result) => {
+      res.json(result.data);
+    }
+  });
+});
+
+app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
+
+
+
+
+Entregáveis:
+
+Um sistema web funcional hospedado no Replit.
+Dashboards interativos com gráficos e filtros.
+Geração de relatórios em PDF com botões dedicados, identificados como "Relatório Produzido pela ASTEC - CORREPOL".
+Documentação básica no README do Replit explicando como executar o projeto e acessar o sistema.
+
+
+Observações:
+
+Garanta que o sistema seja intuitivo e visualmente atraente, com uma paleta de cores moderna (por exemplo, tons de azul e branco com Tailwind CSS).
+Teste a funcionalidade de filtros e geração de PDF no ambiente do Replit.
+Inclua tratamento de erros para dados ausentes ou inválidos no CSV.
+Use a data atual (22/07/2025 às 09:48 AM -03) como referência para cálculos de prazos.
+
+
+
+Por favor, construa o sistema conforme descrito, garantindo que todas as funcionalidades estejam operacionais no ambiente do Replit. Forneça o link do projeto no Replit ao concluir.

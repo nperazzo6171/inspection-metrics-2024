@@ -1,0 +1,351 @@
+Prompt para Desenvolvimento no Replit: Implementação de Acesso Restrito para Atualização de Banco de Dados com Planilha Excel
+
+Objetivo
+
+Implementar uma funcionalidade de acesso restrito em um sistema backend existente no Replit, permitindo que usuários autorizados atualizem o banco de dados a partir de uma planilha Excel carregada diretamente no sistema.
+
+Requisitos do Sistema
+
+
+
+
+
+Acesso Restrito:
+
+
+
+
+
+Criar uma área protegida no sistema com autenticação (ex.: login com usuário e senha ou token JWT).
+
+
+
+Apenas usuários com permissões específicas (ex.: admin) podem acessar a funcionalidade de upload.
+
+
+
+Upload de Planilha Excel:
+
+
+
+
+
+Interface no sistema (pode ser uma rota API ou uma página web simples) para upload de arquivos Excel (.xlsx ou .xls).
+
+
+
+Suporte para leitura de planilhas usando bibliotecas como pandas (Python) ou equivalente na linguagem do backend.
+
+
+
+Processamento da Planilha:
+
+
+
+
+
+Ler o conteúdo da planilha e mapear os dados para as tabelas do banco de dados.
+
+
+
+Validar os dados da planilha (ex.: verificar formatos, valores obrigatórios, duplicatas).
+
+
+
+Tratar erros (ex.: linhas inválidas, colunas ausentes) e retornar feedback ao usuário.
+
+
+
+Atualização do Banco de Dados:
+
+
+
+
+
+Inserir, atualizar ou excluir registros no banco de dados com base nos dados da planilha.
+
+
+
+Garantir transações seguras (ex.: usar transações no banco para evitar inconsistências).
+
+
+
+Registrar logs de todas as operações realizadas (ex.: usuário, data/hora, alterações feitas).
+
+
+
+Segurança e Boas Práticas:
+
+
+
+
+
+Proteger contra uploads maliciosos (ex.: limitar tamanho do arquivo, validar tipo de arquivo).
+
+
+
+Implementar validação CSRF para formulários (se aplicável).
+
+
+
+Usar prepared statements ou ORM para evitar SQL injection.
+
+
+
+Armazenar senhas de forma segura (ex.: hash com bcrypt).
+
+
+
+Feedback ao Usuário:
+
+
+
+
+
+Após o upload e processamento, exibir um relatório com o resultado (ex.: número de linhas processadas, erros encontrados).
+
+
+
+Permitir download de um arquivo de log ou relatório (opcional).
+
+Tecnologias Sugeridas
+
+
+
+
+
+Linguagem: Python (com Flask ou FastAPI) ou Node.js (com Express), dependendo do sistema existente.
+
+
+
+Bibliotecas para Excel:
+
+
+
+
+
+Python: pandas + openpyxl ou xlrd.
+
+
+
+Node.js: xlsx ou exceljs.
+
+
+
+Banco de Dados: SQLite, PostgreSQL ou MySQL (conforme o sistema atual).
+
+
+
+Autenticação: JWT, OAuth2, ou autenticação baseada em sessão.
+
+
+
+Frontend (opcional): HTML/CSS/JS simples ou framework como React para a interface de upload.
+
+Estrutura do Projeto no Replit
+
+
+
+
+
+Diretórios:
+
+
+
+
+
+/routes: Rotas da API (ex.: /api/upload, /api/login).
+
+
+
+/services: Lógica de processamento da planilha e interação com o banco.
+
+
+
+/middleware: Middlewares de autenticação e validação.
+
+
+
+/logs: Armazenamento de logs (arquivo ou tabela no banco).
+
+
+
+/public (se aplicável): Arquivos estáticos para interface web.
+
+
+
+Arquivos Principais:
+
+
+
+
+
+main.py (ou index.js): Arquivo principal do servidor.
+
+
+
+auth.py (ou auth.js): Lógica de autenticação.
+
+
+
+excel_processor.py (ou excel_processor.js): Lógica de leitura e validação da planilha.
+
+
+
+db.py (ou db.js): Conexão e operações no banco de dados.
+
+Passos de Implementação
+
+
+
+
+
+Configurar Autenticação:
+
+
+
+
+
+Criar uma rota de login que verifica credenciais e retorna um token ou sessão.
+
+
+
+Implementar middleware para proteger a rota de upload.
+
+
+
+Criar Rota de Upload:
+
+
+
+
+
+Configurar endpoint (ex.: POST /api/upload) para receber arquivos Excel.
+
+
+
+Validar tipo e tamanho do arquivo antes de processar.
+
+
+
+Processar Planilha:
+
+
+
+
+
+Usar biblioteca para ler o arquivo Excel e extrair dados.
+
+
+
+Mapear colunas da planilha para campos do banco de dados.
+
+
+
+Validar dados (ex.: tipos corretos, valores obrigatórios).
+
+
+
+Atualizar Banco de Dados:
+
+
+
+
+
+Usar transações para garantir consistência.
+
+
+
+Executar operações (INSERT, UPDATE, DELETE) com base nos dados processados.
+
+
+
+Tratar erros e reverter transações se necessário.
+
+
+
+Gerar Feedback:
+
+
+
+
+
+Registrar resultados em log (ex.: arquivo ou tabela).
+
+
+
+Retornar resposta ao usuário com detalhes da operação.
+
+
+
+Testes:
+
+
+
+
+
+Testar upload com planilhas válidas e inválidas.
+
+
+
+Verificar comportamento com arquivos grandes ou maliciosos.
+
+
+
+Garantir que apenas usuários autorizados acessem a funcionalidade.
+
+Exemplo de Código (Python com Flask)
+
+from flask import Flask, request, jsonify
+import pandas as pd
+from functools import wraps
+import jwt
+import sqlite3
+from datetime import datetime
+
+app = Flask(__name__)
+SECRET_KEY = "sua-chave-secreta"
+
+# Middleware de autenticação
+def require_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = request.headers.get('Authorization')
+        if not token:
+            return jsonify({"error": "Token necessário"}), 401
+        try:
+            jwt.decode(token.replace("Bearer ", ""), SECRET_KEY, algorithms=["HS256"])
+        except:
+            return jsonify({"error": "Token inválido"}), 401
+        return f(*args, **kwargs)
+    return decorated
+
+# Rota de upload
+@app.route('/api/upload', methods=['POST'])
+@require_auth
+def upload_excel():
+    if 'file' not in request.files:
+        return jsonify({"error": "Nenhum arquivo enviado"}), 400
+    file = request.files['file']
+    if not file.filename.endswith(('.xlsx', '.xls')):
+        return jsonify({"error": "Formato de arquivo inválido"}), 400
+    
+    # Processar planilha
+    try:
+        df = pd.read_excel(file)
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+        
+        # Exemplo: Inserir dados em uma tabela
+        for _, row in df.iterrows():
+            cursor.execute("INSERT INTO tabela_exemplo (coluna1, coluna2) VALUES (?, ?)",
+                         (row['coluna1'], row['coluna2']))
+        
+        conn.commit()
+        conn.close()
+        return jsonify({"message": f"{len(df)} linhas processadas com sucesso"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080)
