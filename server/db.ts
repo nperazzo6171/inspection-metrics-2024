@@ -1,12 +1,9 @@
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-serverless';
-import ws from "ws";
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 import * as schema from "@shared/schema";
 
-neonConfig.webSocketConstructor = ws;
-
 // Em ambiente de desenvolvimento, permitir execução sem banco de dados
-let pool;
+let client;
 let db;
 
 // Temporariamente desabilitado para desenvolvimento sem PostgreSQL
@@ -17,8 +14,8 @@ let db;
 // }
 
 if (process.env.DATABASE_URL) {
-  pool = new Pool({ connectionString: process.env.DATABASE_URL });
-  db = drizzle({ client: pool, schema });
+  client = postgres(process.env.DATABASE_URL);
+  db = drizzle(client, { schema });
 } else {
   console.warn('DATABASE_URL não definido. Funcionalidades de banco de dados não estarão disponíveis.');
   // Criar mock objects para evitar erros
@@ -28,9 +25,9 @@ if (process.env.DATABASE_URL) {
     update: () => ({ set: () => ({ where: () => [] }) }),
     delete: () => ({ where: () => [] })
   } as any;
-  pool = {
+  client = {
     query: () => Promise.resolve({ rows: [] })
   } as any;
 }
 
-export { pool, db };
+export { client as pool, db };
