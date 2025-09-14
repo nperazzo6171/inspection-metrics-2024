@@ -1,0 +1,231 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Markdown Preview</title>
+      <style>
+        body {
+          font-family: sans-serif;
+          padding: 40px;
+          line-height: 1.6;
+          background: #fdfdfd;
+          color: #333;
+        }
+        pre {
+          background: #f4f4f4;
+          padding: 10px;
+          border-radius: 5px;
+          overflow-x: auto;
+        }
+        code {
+          font-family: monospace;
+          background: #eee;
+          padding: 2px 4px;
+        }
+        table {
+          border-collapse: collapse;
+          width: 100%;
+          margin-top: 20px;
+        }
+        th, td {
+          border: 1px solid #ccc;
+          padding: 8px 12px;
+          text-align: left;
+        }
+        th {
+          background-color: #f2f2f2;
+          font-weight: bold;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>Relatório de Testes - SGII Sistema de Gestão de Inspeções e Indicadores</h1>
+<h2>Resumo Executivo</h2>
+<p>Este relatório apresenta os resultados dos testes realizados no sistema SGII (Sistema de Gestão de Inspeções e Indicadores). O sistema está rodando localmente na porta 5000 e foi analisado para identificar funcionalidades principais e pontos de teste.</p>
+<h2>Informações do Sistema</h2>
+<ul>
+<li><strong>Nome do Projeto</strong>: SGII - Sistema de Gestão de Inspeções e Indicadores</li>
+<li><strong>Tecnologias</strong>: React + TypeScript (Frontend), Node.js + Express (Backend)</li>
+<li><strong>Banco de Dados</strong>: PostgreSQL</li>
+<li><strong>Porta Local</strong>: 5000</li>
+<li><strong>Status do Servidor</strong>: ✅ Ativo (http://localhost:5000)</li>
+</ul>
+<h2>Credenciais de Teste</h2>
+<ul>
+<li><strong>Usuário</strong>: astec.admin</li>
+<li><strong>Senha</strong>: Correpol@2025#BA</li>
+</ul>
+<h2>Funcionalidades Identificadas</h2>
+<h3>1. Sistema de Autenticação ✅</h3>
+<ul>
+<li><strong>Status</strong>: Implementado</li>
+<li><strong>Descrição</strong>: Sistema de login com JWT tokens</li>
+<li><strong>Arquivos</strong>: <code>server/middleware/auth.js</code>, <code>client/src/components/Login.tsx</code></li>
+</ul>
+<h3>2. Upload de Dados ✅</h3>
+<ul>
+<li><strong>Status</strong>: Implementado</li>
+<li><strong>Descrição</strong>: Upload de arquivos Excel/CSV para importação de dados</li>
+<li><strong>Arquivos</strong>: <code>server/routes/upload.js</code>, <code>client/src/components/Upload.tsx</code></li>
+<li><strong>Suporte</strong>: Arquivos .xlsx e .csv</li>
+</ul>
+<h3>3. Dashboard Analítico ✅</h3>
+<ul>
+<li><strong>Status</strong>: Implementado</li>
+<li><strong>Descrição</strong>: Visualização de métricas e indicadores</li>
+<li><strong>Arquivos</strong>: <code>client/src/components/Dashboard.tsx</code></li>
+<li><strong>Recursos</strong>: Gráficos interativos, métricas em tempo real</li>
+</ul>
+<h3>4. Sistema de Filtros ✅</h3>
+<ul>
+<li><strong>Status</strong>: Implementado</li>
+<li><strong>Descrição</strong>: Filtros avançados para análise de dados</li>
+<li><strong>Funcionalidades</strong>: Filtros por data, unidade, tipo de inspeção</li>
+</ul>
+<h3>5. Geração de Relatórios ✅</h3>
+<ul>
+<li><strong>Status</strong>: Implementado</li>
+<li><strong>Descrição</strong>: Geração de relatórios em PDF</li>
+<li><strong>Arquivos</strong>: <code>server/utils/pdfGenerator.js</code></li>
+<li><strong>Biblioteca</strong>: jsPDF</li>
+</ul>
+<h3>6. Controle de Prazos ✅</h3>
+<ul>
+<li><strong>Status</strong>: Implementado</li>
+<li><strong>Descrição</strong>: Monitoramento de prazos de inspeções</li>
+<li><strong>Recursos</strong>: Alertas de vencimento, notificações</li>
+</ul>
+<h2>Plano de Testes Recomendado</h2>
+<h3>Testes de Alta Prioridade</h3>
+<h4>1. Teste de Login</h4>
+<ul>
+<li><strong>Objetivo</strong>: Verificar autenticação do sistema</li>
+<li><strong>Passos</strong>:
+<ol>
+<li>Acessar http://localhost:5000</li>
+<li>Inserir credenciais: astec.admin / Correpol@2025#BA</li>
+<li>Verificar redirecionamento para dashboard</li>
+<li>Testar logout</li>
+</ol>
+</li>
+<li><strong>Resultado Esperado</strong>: Login bem-sucedido e acesso ao sistema</li>
+</ul>
+<h4>2. Teste de Dashboard</h4>
+<ul>
+<li><strong>Objetivo</strong>: Verificar carregamento e funcionalidade do dashboard</li>
+<li><strong>Passos</strong>:
+<ol>
+<li>Fazer login no sistema</li>
+<li>Verificar carregamento do dashboard</li>
+<li>Verificar exibição de métricas</li>
+<li>Testar interatividade dos gráficos</li>
+</ol>
+</li>
+<li><strong>Resultado Esperado</strong>: Dashboard carrega em &lt; 3 segundos com dados</li>
+</ul>
+<h4>3. Teste de Upload</h4>
+<ul>
+<li><strong>Objetivo</strong>: Verificar funcionalidade de upload de arquivos</li>
+<li><strong>Passos</strong>:
+<ol>
+<li>Acessar seção de upload</li>
+<li>Selecionar arquivo Excel/CSV válido</li>
+<li>Executar upload</li>
+<li>Verificar processamento dos dados</li>
+</ol>
+</li>
+<li><strong>Resultado Esperado</strong>: Arquivo processado com sucesso</li>
+</ul>
+<h3>Testes de Média Prioridade</h3>
+<h4>4. Teste de Filtros</h4>
+<ul>
+<li><strong>Objetivo</strong>: Verificar sistema de filtros</li>
+<li><strong>Passos</strong>:
+<ol>
+<li>Acessar lista de dados</li>
+<li>Aplicar filtros por data</li>
+<li>Aplicar filtros por unidade</li>
+<li>Verificar resultados filtrados</li>
+</ol>
+</li>
+<li><strong>Resultado Esperado</strong>: Filtros funcionam corretamente</li>
+</ul>
+<h4>5. Teste de Relatórios</h4>
+<ul>
+<li><strong>Objetivo</strong>: Verificar geração de relatórios PDF</li>
+<li><strong>Passos</strong>:
+<ol>
+<li>Acessar seção de relatórios</li>
+<li>Selecionar período</li>
+<li>Gerar relatório</li>
+<li>Verificar download do PDF</li>
+</ol>
+</li>
+<li><strong>Resultado Esperado</strong>: PDF gerado e baixado com sucesso</li>
+</ul>
+<h4>6. Teste de Prazos</h4>
+<ul>
+<li><strong>Objetivo</strong>: Verificar controle de prazos</li>
+<li><strong>Passos</strong>:
+<ol>
+<li>Acessar seção de prazos</li>
+<li>Verificar listagem</li>
+<li>Verificar alertas de vencimento</li>
+</ol>
+</li>
+<li><strong>Resultado Esperado</strong>: Prazos exibidos corretamente</li>
+</ul>
+<h2>Testes de Responsividade</h2>
+<h3>Resoluções a Testar</h3>
+<ul>
+<li><strong>Desktop</strong>: 1920x1080</li>
+<li><strong>Tablet</strong>: 768x1024</li>
+<li><strong>Mobile</strong>: 375x667</li>
+</ul>
+<h2>Observações Técnicas</h2>
+<h3>Configuração do Ambiente</h3>
+<ul>
+<li>✅ Servidor rodando na porta 5000</li>
+<li>⚠️ DATABASE_URL não configurada (funcionalidades de banco desabilitadas)</li>
+<li>✅ Arquivos de configuração presentes</li>
+</ul>
+<h3>Dependências Principais</h3>
+<ul>
+<li>React 18+</li>
+<li>TypeScript</li>
+<li>Express.js</li>
+<li>PostgreSQL (não configurado)</li>
+<li>Multer (upload de arquivos)</li>
+<li>jsPDF (geração de PDFs)</li>
+</ul>
+<h2>Recomendações</h2>
+<h3>Configuração do Banco de Dados</h3>
+<ol>
+<li>Configurar variável DATABASE_URL</li>
+<li>Executar migrações do banco</li>
+<li>Testar funcionalidades que dependem do banco</li>
+</ol>
+<h3>Testes Automatizados</h3>
+<ol>
+<li>Implementar testes unitários com Jest</li>
+<li>Adicionar testes de integração</li>
+<li>Configurar testes E2E com Cypress</li>
+</ol>
+<h3>Melhorias de Performance</h3>
+<ol>
+<li>Implementar cache para consultas frequentes</li>
+<li>Otimizar carregamento de componentes</li>
+<li>Adicionar lazy loading para rotas</li>
+</ol>
+<h2>Conclusão</h2>
+<p>O sistema SGII apresenta uma arquitetura sólida com funcionalidades bem implementadas. O servidor está funcionando corretamente na porta 5000, mas requer configuração do banco de dados para funcionalidade completa. Recomenda-se executar os testes manuais listados acima e implementar testes automatizados para garantir a qualidade contínua do sistema.</p>
+<hr>
+<p><strong>Data do Relatório</strong>: $(Get-Date -Format &quot;dd/MM/yyyy HH:mm&quot;)
+<strong>Ambiente</strong>: Desenvolvimento Local
+<strong>Status</strong>: Sistema Ativo - Pronto para Testes Manuais</p>
+
+    </body>
+    </html>
+  

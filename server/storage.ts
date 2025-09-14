@@ -33,14 +33,11 @@ export interface IStorage {
 
 export class DatabaseStorage implements IStorage {
   constructor() {
-    // Inicializar usuário admin apenas se houver conexão com banco de dados
     if (process.env.DATABASE_URL) {
       this.initializeAdminUser();
-    } else {
-      console.warn('Banco de dados não disponível. Inicialização de usuário admin ignorada.');
+      this.initializeSampleControlePrazos();
+      this.loadRealInspectionData();
     }
-    // REMOVIDO: Não carregar dados de inspeção automaticamente no startup
-    // this.loadRealInspectionData();
   }
 
   private async initializeAdminUser() {
@@ -157,6 +154,20 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
+    // Se não há banco de dados, retornar usuário padrão para desenvolvimento
+    if (!process.env.DATABASE_URL) {
+      if (username === 'astec.admin') {
+        return {
+          id: 1,
+          username: 'astec.admin',
+          password: 'Correpol@2025#BA',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        };
+      }
+      return undefined;
+    }
+    
     const [user] = await db.select().from(users).where(eq(users.username, username));
     return user || undefined;
   }
@@ -170,10 +181,17 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getAllInspections(): Promise<Inspection[]> {
+    if (!process.env.DATABASE_URL) {
+      return [];
+    }
     return await db.select().from(inspections);
   }
 
   async getInspectionsByFilters(filters: any): Promise<Inspection[]> {
+    if (!process.env.DATABASE_URL) {
+      return [];
+    }
+    
     const conditions = [];
     
     if (filters.unidade && filters.unidade.length > 0) {
@@ -274,6 +292,9 @@ export class DatabaseStorage implements IStorage {
 
   // Controle de Prazos methods
   async getAllControlePrazos(): Promise<ControlePrazo[]> {
+    if (!process.env.DATABASE_URL) {
+      return [];
+    }
     return await db.select().from(controlePrazos).orderBy(controlePrazos.dataPrazo);
   }
 
@@ -364,6 +385,9 @@ export class DatabaseStorage implements IStorage {
 
   // Gallery methods
   async getAllPhotos(): Promise<GalleryPhoto[]> {
+    if (!process.env.DATABASE_URL) {
+      return [];
+    }
     return await db.select().from(galleryPhotos).orderBy(galleryPhotos.createdAt);
   }
 
@@ -387,6 +411,9 @@ export class DatabaseStorage implements IStorage {
 
   // Document methods
   async getAllDocuments(): Promise<Document[]> {
+    if (!process.env.DATABASE_URL) {
+      return [];
+    }
     return await db.select().from(documents).orderBy(documents.createdAt);
   }
 

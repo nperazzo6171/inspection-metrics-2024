@@ -1,0 +1,69 @@
+{
+  "tech_stack": [
+    "TypeScript",
+    "React",
+    "Express.js",
+    "Node.js",
+    "PostgreSQL",
+    "Drizzle ORM",
+    "Vite",
+    "Tailwind CSS",
+    "Recharts",
+    "jsPDF",
+    "PapaParse",
+    "XLSX",
+    "Multer"
+  ],
+  "features": [
+    {
+      "name": "Authentication System",
+      "description": "Sistema de autenticação com login/logout usando credenciais hardcoded",
+      "files": ["server/routes.ts", "client/src/components/login.tsx", "server/storage.ts"]
+    },
+    {
+      "name": "Inspection Management",
+      "description": "Gerenciamento completo de inspeções com CRUD operations",
+      "files": ["server/routes.ts", "server/storage.ts", "client/src/components/admin-upload.tsx", "shared/schema.ts"]
+    },
+    {
+      "name": "Excel/CSV Upload",
+      "description": "Upload e processamento de arquivos Excel/CSV para importação de dados de inspeções",
+      "files": ["server/routes.ts", "client/src/components/admin-upload.tsx"]
+    },
+    {
+      "name": "Controle de Prazos",
+      "description": "Sistema de controle de prazos com upload de dados e gerenciamento",
+      "files": ["server/routes.ts", "client/src/components/deadlines.tsx", "client/src/components/admin-upload.tsx"]
+    },
+    {
+      "name": "Dashboard Analytics",
+      "description": "Dashboard com métricas e gráficos de inspeções usando Recharts",
+      "files": ["client/src/components/dashboard.tsx", "client/src/components/charts.tsx"]
+    },
+    {
+      "name": "PDF Report Generation",
+      "description": "Geração de relatórios em PDF usando jsPDF",
+      "files": ["client/src/components/reports.tsx"]
+    },
+    {
+      "name": "Data Filtering",
+      "description": "Sistema de filtros avançados para dados de inspeções",
+      "files": ["client/src/components/filters.tsx", "server/routes.ts"]
+    },
+    {
+      "name": "Database Integration",
+      "description": "Integração com PostgreSQL usando Drizzle ORM",
+      "files": ["server/storage.ts", "drizzle.config.ts", "scripts/setup-local-db.mjs"]
+    },
+    {
+      "name": "API Routes",
+      "description": "API RESTful completa para todas as operações do sistema",
+      "files": ["server/routes.ts", "server/index.ts"]
+    },
+    {
+      "name": "Real-time Data Updates",
+      "description": "Atualizações em tempo real dos dados usando React Query",
+      "files": ["client/src/hooks/useInspections.ts", "client/src/lib/api.ts"]
+    }
+  ]
+}

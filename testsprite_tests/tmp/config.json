@@ -1,0 +1,17 @@
+{
+  "status": "init",
+  "scope": "codebase",
+  "type": "frontend",
+  "localEndpoint": "http://localhost:5000",
+  "serverPort": 56398,
+  "executionArgs": {
+    "projectName": "InspectionMetrics",
+    "projectPath": "c:\\Users\\PCVIL\\Downloads\\SGII\\InspectionMetrics\\InspectionMetrics",
+    "testIds": [],
+    "additionalInstruction": "Testar funcionalidades principais do sistema SGII: login, upload de dados, dashboard, filtros e relatórios",
+    "envs": {
+      "API_KEY": "sk-user-dE7-KngqTB0qOXWvNMuR01bQFVemVaqcA_tZ4gJpeEUK-CQPVyMdkITFi1i1Miq-jlfC70DBbHygNt56ziWgDEH2bf7GtZpmd_FRMq06TEE5p6C3EWq5aAeASmbE3t6epnc"
+    }
+  },
+  "proxy": "http://33d0db07-e104-414b-8a0d-fc60a617fd91:w4E5Jpc1u5DnUWsmpedGB9OCkKfBSYHE@tun.testsprite.com:8080"
+}

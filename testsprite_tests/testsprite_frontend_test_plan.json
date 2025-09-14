@@ -1,0 +1,104 @@
+{
+  "testPlan": {
+    "id": "sgii_frontend_tests",
+    "title": "SGII Frontend Test Suite",
+    "projectName": "SGII - Sistema de Gestão de Inspeções e Indicadores",
+    "testType": "frontend",
+    "baseUrl": "http://localhost:5000",
+    "needLogin": true,
+    "loginCredentials": {
+      "username": "astec.admin",
+      "password": "Correpol@2025#BA"
+    },
+    "tests": [
+      {
+        "id": "test_001",
+        "name": "Login Functionality",
+        "description": "Testar funcionalidade de login com credenciais válidas e inválidas",
+        "priority": "high",
+        "steps": [
+          "Acessar página de login",
+          "Inserir credenciais válidas",
+          "Verificar redirecionamento para dashboard",
+          "Testar logout",
+          "Testar credenciais inválidas"
+        ]
+      },
+      {
+        "id": "test_002",
+        "name": "Dashboard Navigation",
+        "description": "Testar navegação e carregamento do dashboard principal",
+        "priority": "high",
+        "steps": [
+          "Fazer login",
+          "Verificar carregamento do dashboard",
+          "Verificar exibição de métricas",
+          "Testar navegação entre seções"
+        ]
+      },
+      {
+        "id": "test_003",
+        "name": "Upload de Dados",
+        "description": "Testar funcionalidade de upload de arquivos Excel/CSV",
+        "priority": "high",
+        "steps": [
+          "Acessar seção de upload",
+          "Testar upload de arquivo Excel válido",
+          "Verificar processamento dos dados",
+          "Testar upload de arquivo inválido",
+          "Verificar mensagens de erro"
+        ]
+      },
+      {
+        "id": "test_004",
+        "name": "Filtros de Dados",
+        "description": "Testar sistema de filtros para dados de inspeções",
+        "priority": "medium",
+        "steps": [
+          "Acessar lista de inspeções",
+          "Aplicar filtros por data",
+          "Aplicar filtros por unidade",
+          "Verificar resultados filtrados",
+          "Limpar filtros"
+        ]
+      },
+      {
+        "id": "test_005",
+        "name": "Geração de Relatórios",
+        "description": "Testar geração de relatórios em PDF",
+        "priority": "medium",
+        "steps": [
+          "Acessar seção de relatórios",
+          "Selecionar período",
+          "Gerar relatório PDF",
+          "Verificar download do arquivo",
+          "Validar conteúdo do relatório"
+        ]
+      },
+      {
+        "id": "test_006",
+        "name": "Controle de Prazos",
+        "description": "Testar funcionalidade de controle de prazos",
+        "priority": "medium",
+        "steps": [
+          "Acessar seção de prazos",
+          "Verificar listagem de prazos",
+          "Testar upload de dados de prazos",
+          "Verificar alertas de vencimento"
+        ]
+      },
+      {
+        "id": "test_007",
+        "name": "Responsividade",
+        "description": "Testar responsividade da interface em diferentes tamanhos de tela",
+        "priority": "low",
+        "steps": [
+          "Testar em desktop (1920x1080)",
+          "Testar em tablet (768x1024)",
+          "Testar em mobile (375x667)",
+          "Verificar elementos da interface"
+        ]
+      }
+    ]
+  }
+}
