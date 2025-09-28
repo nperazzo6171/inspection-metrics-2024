@@ -4,12 +4,18 @@ import Header from "@/components/header";
 import DashboardGeneral from "@/components/dashboard-general";
 import Reports from "@/components/reports";
 import RelatorioPorUnidade from "@/components/relatorio-por-unidade";
-// Gallery removida temporariamente
 import Deadlines from "@/components/deadlines";
 import Normalization from "@/components/normalization";
 import NormalizacaoDocs from "@/components/normalizacao-docs";
 import StatusRegularizacao from "@/components/controle-prazos";
 import AdminUpload from "@/components/admin-upload";
+import ArmasApreendidas from "@/components/armas-apreendidas";
+import DrogasRecolhidas from "@/components/drogas-recolhidas";
+import VeiculosApreendidos from "@/components/veiculos-apreendidos";
+import PassagemGestao from "@/components/passagem-gestao";
+import ExercicioCumulativo from "@/components/exercicio-cumulativo";
+import MilaeSemIP from "@/components/milae-sem-ip";
+import DemandasMPE from "@/components/demandas-mpe";
 import { apiRequest } from "@/lib/queryClient";
 
 export default function Dashboard() {
@@ -65,6 +71,28 @@ export default function Dashboard() {
         return <NormalizacaoDocs />;
       case 'status-regularizacao':
         return <StatusRegularizacao />;
+      case 'armas-apreendidas':
+        return <ArmasApreendidas />;
+      case 'drogas-recolhidas':
+        return <DrogasRecolhidas />;
+      case 'veiculos-apreendidos':
+        return <VeiculosApreendidos />;
+      case 'passagem-gestao':
+        return <PassagemGestao />;
+      case 'exercicio-cumulativo':
+        return <ExercicioCumulativo />;
+      case 'milae-sem-ip':
+        return <MilaeSemIP />;
+      case 'demandas-mpe':
+        return <DemandasMPE />;
+      case 'controles-correcionais':
+        return <div className="text-center py-12"><p className="text-gray-500">Controles Correcionais - Em desenvolvimento</p></div>;
+      case 'investigacoes-preliminares':
+        return <div className="text-center py-12"><p className="text-gray-500">Investigações Preliminares - Em desenvolvimento</p></div>;
+      case 'termo-cooperacao-vencido':
+        return <div className="text-center py-12"><p className="text-gray-500">Termo de Cooperação Vencido - Em desenvolvimento</p></div>;
+      case 'comissao-avaliacao':
+        return <div className="text-center py-12"><p className="text-gray-500">Comissão de Avaliação - Em desenvolvimento</p></div>;
       case 'admin':
         return <AdminUpload />;
       default:
