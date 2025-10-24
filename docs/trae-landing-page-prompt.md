@@ -56,6 +56,7 @@ Criar uma landing page institucional com autenticação segura, múltiplas abas 
    - Inventário de inquéritos físicos sem digitalização e migração.
    - Prontuário do servidor com informações correicionais agregadas.
    - Visualização de dados do PIMA (Programa de Integridade e Monitoramento de Atividades).
+   - Aba de cadeia de custódia, categorizando unidades policiais com implementação plena, parcial ou não implementada, com indicadores visuais e ações corretivas sugeridas.
    - Sobreposição do mapa de geolocalização com os indicadores relevantes quando aplicável.
 
 4. **Integrações e automações**
