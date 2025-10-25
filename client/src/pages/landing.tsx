@@ -29,37 +29,37 @@ export default function LandingPage() {
       icon: Shield,
       title: "Segurança Avançada",
       description: "Autenticação 2FA e criptografia de ponta a ponta para proteção total dos dados institucionais.",
-      color: "text-blue-600"
+      color: "text-yellow-400"
     },
     {
       icon: BarChart3,
       title: "Dashboards Interativos",
       description: "Visualize indicadores em tempo real com gráficos modernos e relatórios personalizados.",
-      color: "text-green-600"
+      color: "text-yellow-400"
     },
     {
       icon: Map,
       title: "Mapa Georreferenciado",
       description: "Localização visual das unidades com indicadores coloridos de conformidade e casos.",
-      color: "text-orange-600"
+      color: "text-yellow-400"
     },
     {
       icon: MessageCircle,
       title: "Assistente com IA",
       description: "Chatbot inteligente disponível 24/7 para orientações e consultas operacionais.",
-      color: "text-purple-600"
+      color: "text-yellow-400"
     },
     {
       icon: Bell,
       title: "Alertas Inteligentes",
       description: "Notificações automáticas para prazos críticos e pendências urgentes.",
-      color: "text-red-600"
+      color: "text-yellow-400"
     },
     {
       icon: Database,
       title: "Integração Total",
       description: "Conectado com SEI, SICORQ e e-PAD para sincronização automática de dados.",
-      color: "text-indigo-600"
+      color: "text-yellow-400"
     }
   ];
 
@@ -146,16 +146,16 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-800 border-y-2 border-yellow-500">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => {
               const IconComponent = stat.icon;
               return (
                 <div key={index} className="text-center">
-                  <IconComponent className="h-8 w-8 mx-auto mb-3 text-blue-600" />
-                  <div className="text-4xl font-bold text-slate-900 mb-1">{stat.value}</div>
-                  <div className="text-sm text-slate-600">{stat.label}</div>
+                  <IconComponent className="h-8 w-8 mx-auto mb-3 text-yellow-400" />
+                  <div className="text-4xl font-bold text-white mb-1">{stat.value}</div>
+                  <div className="text-sm text-gray-300">{stat.label}</div>
                 </div>
               );
             })}
@@ -163,13 +163,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 to-slate-800">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h3 className="text-4xl font-bold text-slate-900 mb-4">
+            <h3 className="text-4xl font-bold text-white mb-4">
               Recursos da Plataforma
             </h3>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Ferramentas avançadas para gestão completa e eficiente dos processos de inspeção
             </p>
           </div>
@@ -178,15 +178,15 @@ export default function LandingPage() {
             {features.map((feature, index) => {
               const IconComponent = feature.icon;
               return (
-                <Card key={index} className="hover:shadow-lg transition-shadow duration-300 border-slate-200">
+                <Card key={index} className="bg-slate-800 border-slate-700 hover:border-yellow-500 transition-all duration-300 hover:shadow-xl hover:shadow-yellow-500/20">
                   <CardHeader>
                     <div className="flex items-start space-x-4">
-                      <div className={`p-3 rounded-lg bg-slate-50 ${feature.color}`}>
-                        <IconComponent className="h-6 w-6" />
+                      <div className="p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/30">
+                        <IconComponent className="h-6 w-6 text-yellow-400" />
                       </div>
                       <div>
-                        <CardTitle className="text-xl mb-2">{feature.title}</CardTitle>
-                        <CardDescription className="text-slate-600">
+                        <CardTitle className="text-xl mb-2 text-white">{feature.title}</CardTitle>
+                        <CardDescription className="text-gray-400">
                           {feature.description}
                         </CardDescription>
                       </div>
@@ -199,11 +199,11 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-950 text-white border-t-2 border-yellow-500">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h3 className="text-4xl font-bold mb-4">Módulos Disponíveis</h3>
-            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Acesso centralizado a todos os indicadores e controles institucionais
             </p>
           </div>
@@ -212,11 +212,11 @@ export default function LandingPage() {
             {modules.map((module, index) => {
               const IconComponent = module.icon;
               return (
-                <Card key={index} className="bg-slate-800 border-slate-700 hover:bg-slate-750 transition-colors">
+                <Card key={index} className="bg-slate-900 border-slate-700 hover:border-yellow-500 hover:bg-slate-800 transition-all duration-300">
                   <CardHeader>
-                    <IconComponent className="h-8 w-8 text-blue-400 mb-3" />
+                    <IconComponent className="h-8 w-8 text-yellow-400 mb-3" />
                     <CardTitle className="text-white text-lg">{module.name}</CardTitle>
-                    <CardDescription className="text-slate-400 text-sm">
+                    <CardDescription className="text-gray-400 text-sm">
                       {module.description}
                     </CardDescription>
                   </CardHeader>
