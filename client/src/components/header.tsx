@@ -106,7 +106,7 @@ export default function Header({ activeTab, onTabChange }: HeaderProps) {
 
       <div className="bg-slate-800 border-t border-slate-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center space-x-1 py-2 overflow-x-auto">
+          <nav className="flex flex-wrap items-center gap-1 py-2">
             {mainTabs.map((tab) => {
               const Icon = tab.icon;
               return (
@@ -118,7 +118,7 @@ export default function Header({ activeTab, onTabChange }: HeaderProps) {
                     activeTab === tab.id
                       ? 'bg-yellow-500 text-slate-900 hover:bg-yellow-600 font-semibold'
                       : 'text-gray-300 hover:text-white hover:bg-slate-700'
-                  } whitespace-nowrap flex-shrink-0`}
+                  } whitespace-nowrap`}
                   onClick={() => onTabChange(tab.id)}
                 >
                   <Icon className="w-4 h-4 mr-2" />
