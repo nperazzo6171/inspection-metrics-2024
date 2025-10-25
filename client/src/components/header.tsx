@@ -44,8 +44,6 @@ export default function Header({ activeTab, onTabChange }: HeaderProps) {
     { id: 'armas-apreendidas', label: 'Armas Apreendidas', icon: Zap },
     { id: 'drogas-recolhidas', label: 'Drogas Recolhidas', icon: Package },
     { id: 'veiculos-apreendidos', label: 'Veículos Apreendidos', icon: Car },
-    { id: 'passagem-gestao', label: 'Passagem de Gestão', icon: Users },
-    { id: 'exercicio-cumulativo', label: 'Exercício Cumulativo', icon: Target },
   ];
 
   const investigationTabs = [
@@ -56,6 +54,8 @@ export default function Header({ activeTab, onTabChange }: HeaderProps) {
   ];
 
   const adminTabs = [
+    { id: 'passagem-gestao', label: 'Passagem de Gestão', icon: Users },
+    { id: 'exercicio-cumulativo', label: 'Exercício Cumulativo', icon: Target },
     { id: 'termo-cooperacao-vencido', label: 'Termo Cooperação Vencido', icon: UserCheck },
     { id: 'comissao-avaliacao', label: 'Comissão de Avaliação', icon: FileText },
     { id: 'admin', label: 'Administração', icon: Shield }
