@@ -138,7 +138,7 @@ export default function LandingPage() {
             <Button
               size="lg"
               variant="outline"
-              className="text-lg px-8 text-white border-white hover:bg-white hover:text-slate-900"
+              className="text-lg px-8 bg-slate-800 text-yellow-400 border-yellow-500 hover:bg-yellow-500 hover:text-slate-900 font-semibold"
             >
               Ver Demonstração
             </Button>
