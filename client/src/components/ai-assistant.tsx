@@ -47,7 +47,10 @@ export default function AIAssistant({ context }: AIAssistantProps) {
     "Explicar status de não conformidade",
     "Como fazer upload de dados?",
     "Gerar relatório por unidade",
-    "O que significa CVLI?"
+    "O que significa CVLI?",
+    "Como ativar autenticação 2FA?",
+    "Explicar níveis de acesso no sistema",
+    "Como exportar dados para Excel?"
   ];
 
   useEffect(() => {
@@ -86,39 +89,59 @@ export default function AIAssistant({ context }: AIAssistantProps) {
   const generateResponse = (query: string, ctx?: string): string => {
     const lowerQuery = query.toLowerCase();
 
+    if (lowerQuery.includes("2fa") || lowerQuery.includes("dois fatores") || lowerQuery.includes("autenticação")) {
+      return "🔐 A autenticação de dois fatores (2FA) adiciona uma camada extra de segurança. Para ativar:\n\n1. Acesse a aba 'Administração'\n2. Clique em 'Configurar 2FA'\n3. Escaneie o QR Code com um app autenticador (Google Authenticator, Authy, etc.)\n4. Digite o código de 6 dígitos para confirmar\n\nApós ativado, você precisará inserir um código a cada login.";
+    }
+
+    if (lowerQuery.includes("nível") || lowerQuery.includes("acesso") || lowerQuery.includes("permissão")) {
+      return "👥 O sistema possui diferentes níveis de acesso:\n\n• Visitante: Visualização de relatórios públicos\n• Operador: Consulta completa de dados\n• Gestor: Edição e aprovação de registros\n• Administrador: Acesso total, incluindo upload de dados e configurações\n\nContate o administrador do sistema para solicitar mudanças de permissão.";
+    }
+
+    if (lowerQuery.includes("excel") || lowerQuery.includes("exportar") || lowerQuery.includes("download")) {
+      return "📊 Para exportar dados para Excel:\n\n1. Acesse qualquer relatório ou tabela\n2. Aplique os filtros desejados\n3. Clique no botão 'Exportar' no canto superior direito\n4. Escolha o formato (Excel, CSV ou PDF)\n\nOs dados serão baixados com todos os filtros aplicados.";
+    }
+
     if (lowerQuery.includes("prazo") || lowerQuery.includes("regularização")) {
-      return "Para consultar prazos de regularização, acesse a aba 'Status de Regularização' no menu principal. Lá você encontrará todos os prazos ativos, vencidos e próximos do vencimento, organizados por unidade policial.";
+      return "📅 Para consultar prazos de regularização:\n\nAcesse a aba 'Prazos' no menu principal. Lá você encontrará:\n• Prazos ativos\n• Prazos próximos do vencimento (amarelo)\n• Prazos expirados (vermelho)\n• Organização por unidade policial\n\nVocê pode filtrar por departamento, período e status.";
     }
 
     if (lowerQuery.includes("não conformidade") || lowerQuery.includes("status")) {
-      return "As não conformidades são classificadas por criticidade (Alta, Média, Baixa) e possuem status de prazo: 'Dentro do prazo', 'Próximo do vencimento' ou 'Prazo expirado'. Você pode filtrar por qualquer desses critérios nos relatórios.";
+      return "⚠️ As não conformidades são classificadas por:\n\n• Criticidade: Alta, Média, Baixa\n• Status de prazo: 'Dentro do prazo', 'Próximo do vencimento' ou 'Prazo expirado'\n• Tipo: Estrutural, Documental, Operacional\n\nVocê pode filtrar por qualquer desses critérios nos relatórios.";
     }
 
     if (lowerQuery.includes("upload") || lowerQuery.includes("carregar")) {
-      return "Para fazer upload de dados, acesse a área administrativa através do ícone de configuração no menu. Você precisará de permissões especiais e poderá carregar planilhas Excel com dados de inspeções ou controle de prazos.";
+      return "📤 Para fazer upload de dados:\n\n1. Acesse a aba 'Administração'\n2. Clique em 'Upload de Dados'\n3. Selecione o tipo de dados (Inspeções, Prazos, etc.)\n4. Escolha o arquivo Excel\n5. Confirme o upload\n\n⚠️ Apenas administradores podem realizar uploads. O arquivo deve seguir o modelo padrão.";
     }
 
     if (lowerQuery.includes("relatório") || lowerQuery.includes("relatorio")) {
-      return "Você pode gerar relatórios personalizados na aba 'Relatórios'. Aplique filtros por ano, departamento, unidade ou período, e exporte os resultados em PDF para análise detalhada.";
+      return "📋 Para gerar relatórios:\n\n1. Acesse a aba 'Relatórios'\n2. Selecione o tipo de relatório\n3. Aplique filtros: ano, departamento, unidade, período\n4. Clique em 'Gerar Relatório'\n5. Exporte em PDF, Excel ou visualize online\n\nOs relatórios incluem gráficos e análises detalhadas.";
     }
 
     if (lowerQuery.includes("cvli")) {
-      return "CVLI significa Crimes Violentos Letais Intencionais. Esta métrica agrupa homicídios, latrocínios e lesões corporais seguidas de morte, sendo um indicador importante para análise de segurança pública.";
+      return "🔍 CVLI (Crimes Violentos Letais Intencionais)\n\nAgrupa:\n• Homicídios dolosos\n• Latrocínios\n• Lesões corporais seguidas de morte\n\nÉ um indicador-chave para análise de segurança pública e está disponível no dashboard CVLI.";
     }
 
-    if (lowerQuery.includes("miae")) {
-      return "MIAE refere-se ao Ministério Público. A aba 'MIAE sem IP' lista boletins de ocorrência que ainda não tiveram inquérito policial instaurado, permitindo acompanhamento dessas pendências.";
+    if (lowerQuery.includes("milae") || lowerQuery.includes("mpe")) {
+      return "⚖️ MILAE sem IP\n\nRefere-se a boletins de ocorrência encaminhados ao Ministério Público que ainda não tiveram inquérito policial instaurado.\n\nNa aba 'MILAE sem IP' você pode:\n• Visualizar pendências\n• Filtrar por unidade e período\n• Acompanhar prazos\n• Exportar relatórios";
     }
 
     if (lowerQuery.includes("mapa") || lowerQuery.includes("geolocalização")) {
-      return "O mapa interativo exibe a localização geográfica de todas as unidades policiais. As bolhas coloridas indicam diferentes níveis de indicadores: verde (baixo), amarelo (médio), laranja (alto) e vermelho (crítico).";
+      return "🗺️ Mapa Interativo\n\nExibe a localização de todas as unidades policiais com indicadores visuais:\n\n🟢 Verde: Indicadores baixos/normais\n🟡 Amarelo: Indicadores médios/atenção\n🟠 Laranja: Indicadores altos/preocupantes\n🔴 Vermelho: Indicadores críticos/urgentes\n\nClique em qualquer bolha para ver detalhes da unidade.";
     }
 
-    if (lowerQuery.includes("galeria") || lowerQuery.includes("fotos")) {
-      return "A galeria de fotos permite visualizar imagens das unidades inspecionadas, organizadas por unidade e departamento. É útil para documentação visual das condições encontradas.";
+    if (lowerQuery.includes("galeria") || lowerQuery.includes("fotos") || lowerQuery.includes("imagens")) {
+      return "📸 Galeria de Fotos\n\nVisualize imagens das unidades inspecionadas:\n• Organizadas por unidade e departamento\n• Filtros por tipo de inspeção\n• Zoom e visualização em tela cheia\n• Download de imagens\n\nÚtil para documentação visual das condições encontradas.";
     }
 
-    return "Entendi sua pergunta. Para informações mais específicas, você pode navegar pelos diferentes módulos do sistema ou consultar a documentação completa. Posso ajudar com: consultas de prazos, status de regularização, geração de relatórios, explicação de indicadores e navegação no sistema.";
+    if (lowerQuery.includes("dashboard") || lowerQuery.includes("painel")) {
+      return "📊 Dashboard Geral\n\nVisão consolidada com:\n• Indicadores principais (KPIs)\n• Gráficos de tendências\n• Distribuição por departamento\n• Alertas de prazos\n• Comparativos históricos\n\nUse os filtros no topo para personalizar a visualização.";
+    }
+
+    if (lowerQuery.includes("ajuda") || lowerQuery.includes("suporte") || lowerQuery.includes("help")) {
+      return "🆘 Precisa de ajuda?\n\nEstou aqui para ajudar com:\n• Navegação no sistema\n• Explicação de indicadores\n• Geração de relatórios\n• Consulta de prazos\n• Dúvidas sobre 2FA\n• Exportação de dados\n• Configurações de acesso\n\nDigite sua dúvida ou escolha uma sugestão abaixo!";
+    }
+
+    return "Entendi sua pergunta. 🤔\n\nPosso ajudar com:\n✓ Consultas de prazos e regularização\n✓ Status de não conformidades\n✓ Geração e exportação de relatórios\n✓ Explicação de indicadores (CVLI, MILAE, etc.)\n✓ Navegação no sistema\n✓ Configuração de 2FA\n✓ Níveis de acesso\n\nDigite 'ajuda' para ver todas as opções ou escolha uma sugestão!";
   };
 
   const handleSuggestionClick = (suggestion: string) => {
