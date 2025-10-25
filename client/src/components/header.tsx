@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/auth";
 import { BarChart3, Clock, CheckCircle, LogOut, FileText, Building2, Scale, Shield, Zap, Package, Car, Users, Target, AlertTriangle, Gavel, FileCheck, Clock3, UserCheck, Map, Activity, Lock } from "lucide-react";
-import policeBadge from "@assets/R-removebg-preview_1753188946424.png";
+import policeBadge from "/Novo_Brasao_PCBA-removebg-preview.png";
 
 interface HeaderProps {
   activeTab: string;
@@ -49,9 +49,14 @@ export default function Header({ activeTab, onTabChange }: HeaderProps) {
             />
             <div className="min-w-0 flex-1">
               <h1 className="text-sm font-semibold text-white leading-tight break-words">
-                Sistema de Gerenciamento dos Indicadores de Inspeção nas Unidades da Polícia Civil do Estado da Bahia
+                Sistema de Gerenciamento dos Indicadores Correcionais e de Inspeção
               </h1>
-              <p className="text-xs text-gray-300 mt-1">ASTEC - CORREPOL</p>
+              <p className="text-xs text-gray-300 mt-1">
+                Secretaria da Segurança Pública - Polícia Civil da Bahia
+              </p>
+              <p className="text-xs text-yellow-500 font-medium">
+                Corregedoria da Polícia Civil - CORREPOL - Assessoria Técnica
+              </p>
             </div>
           </div>
           

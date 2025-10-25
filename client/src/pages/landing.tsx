@@ -83,19 +83,28 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
-      <nav className="bg-white shadow-sm border-b border-slate-200">
+      <nav className="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg border-b border-yellow-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-3">
-              <Shield className="h-8 w-8 text-blue-600" />
+          <div className="flex justify-between items-center py-3">
+            <div className="flex items-center space-x-4">
+              <img
+                src="/Novo_Brasao_PCBA-removebg-preview.png"
+                alt="Brasão Polícia Civil BA"
+                className="h-16 w-auto"
+              />
               <div>
-                <h1 className="text-xl font-bold text-slate-900">Sistema de Inspeção</h1>
-                <p className="text-xs text-slate-600">Polícia Civil da Bahia</p>
+                <h1 className="text-lg font-bold text-white">
+                  Sistema de Gerenciamento dos Indicadores Correcionais e de Inspeção
+                </h1>
+                <p className="text-xs text-gray-300">Secretaria da Segurança Pública - Polícia Civil da Bahia</p>
+                <p className="text-xs text-yellow-400 font-medium">
+                  Corregedoria da Polícia Civil - CORREPOL - Assessoria Técnica
+                </p>
               </div>
             </div>
             <Button
               onClick={() => setLocation("/dashboard")}
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-yellow-500 hover:bg-yellow-600 text-slate-900 font-semibold"
             >
               <Lock className="h-4 w-4 mr-2" />
               Acessar Sistema
@@ -104,24 +113,24 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto text-center">
-          <Badge className="mb-4 bg-blue-100 text-blue-800 hover:bg-blue-200">
-            Plataforma Oficial PCBA
+          <Badge className="mb-4 bg-yellow-500 text-slate-900 hover:bg-yellow-600 font-semibold">
+            Plataforma Oficial CORREPOL
           </Badge>
-          <h2 className="text-5xl font-extrabold text-slate-900 mb-6">
+          <h2 className="text-5xl font-extrabold text-white mb-6">
             Gestão Inteligente de
-            <span className="block text-blue-600 mt-2">Indicadores de Inspeção</span>
+            <span className="block text-yellow-500 mt-2">Indicadores Correcionais e de Inspeção</span>
           </h2>
-          <p className="text-xl text-slate-600 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
             Plataforma integrada para monitoramento, controle e análise de dados institucionais
-            com segurança, eficiência e inteligência artificial.
+            da Polícia Civil da Bahia com segurança, eficiência e inteligência artificial.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
               onClick={() => setLocation("/dashboard")}
-              className="bg-blue-600 hover:bg-blue-700 text-lg px-8"
+              className="bg-yellow-500 hover:bg-yellow-600 text-slate-900 text-lg px-8 font-bold"
             >
               Começar Agora
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -129,7 +138,7 @@ export default function LandingPage() {
             <Button
               size="lg"
               variant="outline"
-              className="text-lg px-8"
+              className="text-lg px-8 text-white border-white hover:bg-white hover:text-slate-900"
             >
               Ver Demonstração
             </Button>
@@ -218,18 +227,18 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-blue-800">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-900 to-slate-800 border-t-4 border-yellow-500">
         <div className="max-w-4xl mx-auto text-center text-white">
           <h3 className="text-4xl font-bold mb-6">
             Pronto para Transformar sua Gestão?
           </h3>
-          <p className="text-xl mb-8 text-blue-100">
-            Acesse agora a plataforma e tenha controle total sobre os indicadores de inspeção
+          <p className="text-xl mb-8 text-gray-300">
+            Acesse agora a plataforma e tenha controle total sobre os indicadores correcionais e de inspeção
           </p>
           <Button
             size="lg"
             onClick={() => setLocation("/dashboard")}
-            className="bg-white text-blue-600 hover:bg-slate-100 text-lg px-8"
+            className="bg-yellow-500 hover:bg-yellow-600 text-slate-900 text-lg px-8 font-bold"
           >
             Acessar Plataforma
             <ArrowRight className="ml-2 h-5 w-5" />
@@ -237,17 +246,22 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <footer className="bg-slate-900 text-slate-400 py-12 px-4 sm:px-6 lg:px-8">
+      <footer className="bg-slate-950 text-slate-400 py-12 px-4 sm:px-6 lg:px-8 border-t-2 border-yellow-500">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <Shield className="h-6 w-6 text-blue-500" />
-                <span className="font-bold text-white">PCBA</span>
+                <img
+                  src="/Novo_Brasao_PCBA-removebg-preview.png"
+                  alt="Brasão PCBA"
+                  className="h-8 w-auto"
+                />
+                <span className="font-bold text-yellow-400">CORREPOL</span>
               </div>
               <p className="text-sm">
-                Sistema de Gestão de Indicadores de Inspeção Institucional
+                Sistema de Gerenciamento dos Indicadores Correcionais e de Inspeção
               </p>
+              <p className="text-xs text-yellow-500 mt-2">Assessoria Técnica</p>
             </div>
             <div>
               <h4 className="font-semibold text-white mb-4">Módulos</h4>
@@ -277,8 +291,9 @@ export default function LandingPage() {
               </ul>
             </div>
           </div>
-          <div className="border-t border-slate-800 mt-12 pt-8 text-center text-sm">
-            <p>&copy; 2025 Polícia Civil da Bahia. Todos os direitos reservados.</p>
+          <div className="border-t border-yellow-500 mt-12 pt-8 text-center text-sm">
+            <p className="text-gray-400">&copy; 2025 Polícia Civil da Bahia - CORREPOL. Todos os direitos reservados.</p>
+            <p className="text-xs text-yellow-500 mt-2">Assessoria Técnica - Sistema de Gerenciamento dos Indicadores Correcionais e de Inspeção</p>
           </div>
         </div>
       </footer>

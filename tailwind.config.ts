@@ -62,10 +62,12 @@ export default {
           ring: "var(--sidebar-ring)",
         },
         police: {
-          blue: "#2563eb",
-          navy: "#1e3a8a",
-          slate: "#475569",
-          gray: "#64748b",
+          blue: "#1e3a8a",
+          navy: "#0f172a",
+          slate: "#334155",
+          gray: "#475569",
+          gold: "#eab308",
+          yellow: "#fbbf24",
         },
       },
       keyframes: {

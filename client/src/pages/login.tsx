@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useAuth } from "@/lib/auth";
 import { User, Lock, LogIn, AlertCircle, ArrowLeft } from "lucide-react";
-import policeBadge from "@assets/R-removebg-preview_1753188946424.png";
+import policeBadge from "/Novo_Brasao_PCBA-removebg-preview.png";
 
 export default function LoginPage() {
   const [, setLocation] = useLocation();
@@ -48,13 +48,22 @@ export default function LoginPage() {
           <img
             src={policeBadge}
             alt="Brasão Polícia Civil BA"
-            className="mx-auto h-20 w-auto"
+            className="mx-auto h-24 w-auto"
           />
           <h2 className="mt-6 text-2xl font-bold text-white leading-tight">
-            Sistema de Gerenciamento dos Indicadores de Inspeção nas Unidades da Polícia Civil do Estado da Bahia
+            Sistema de Gerenciamento dos Indicadores Correcionais e de Inspeção
           </h2>
-          <p className="mt-2 text-sm text-gray-300">
-            ASTEC - CORREPOL
+          <p className="mt-3 text-sm text-gray-300">
+            Secretaria da Segurança Pública
+          </p>
+          <p className="text-sm text-gray-300">
+            Polícia Civil da Bahia
+          </p>
+          <p className="mt-2 text-sm text-yellow-500 font-medium">
+            Corregedoria da Polícia Civil - CORREPOL
+          </p>
+          <p className="text-xs text-yellow-400">
+            Assessoria Técnica
           </p>
         </div>
         
