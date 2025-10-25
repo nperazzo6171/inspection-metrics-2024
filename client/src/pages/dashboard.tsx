@@ -16,6 +16,10 @@ import PassagemGestao from "@/components/passagem-gestao";
 import ExercicioCumulativo from "@/components/exercicio-cumulativo";
 import MilaeSemIP from "@/components/milae-sem-ip";
 import DemandasMPE from "@/components/demandas-mpe";
+import InteractiveMap from "@/components/interactive-map";
+import CVLIDashboard from "@/components/cvli-dashboard";
+import CadeiaCustodia from "@/components/cadeia-custodia";
+import CarceragensInterditadas from "@/components/carceragens-interditadas";
 import { apiRequest } from "@/lib/queryClient";
 
 export default function Dashboard() {
@@ -52,9 +56,8 @@ export default function Dashboard() {
   });
 
   const renderActiveTab = () => {
-    // Use filtered data from reportData when available, otherwise fall back to inspections
     const filteredData = reportData?.inspections || inspections;
-    
+
     switch (activeTab) {
       case 'dashboard':
         return <DashboardGeneral data={filteredData as any[]} reportData={reportData} filters={filters} onFilterChange={setFilters} />;
@@ -62,7 +65,14 @@ export default function Dashboard() {
         return <Reports data={filteredData as any[]} reportData={reportData} filters={filters} onFilterChange={setFilters} />;
       case 'unidade':
         return <RelatorioPorUnidade data={filteredData as any[]} />;
-
+      case 'mapa-interativo':
+        return <InteractiveMap />;
+      case 'cvli':
+        return <CVLIDashboard />;
+      case 'cadeia-custodia':
+        return <CadeiaCustodia />;
+      case 'carceragens':
+        return <CarceragensInterditadas />;
       case 'deadlines':
         return <Deadlines data={filteredData as any[]} />;
       case 'normalization':

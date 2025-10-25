@@ -61,6 +61,12 @@ export default {
           border: "var(--sidebar-border)",
           ring: "var(--sidebar-ring)",
         },
+        police: {
+          blue: "#2563eb",
+          navy: "#1e3a8a",
+          slate: "#475569",
+          gray: "#64748b",
+        },
       },
       keyframes: {
         "accordion-down": {

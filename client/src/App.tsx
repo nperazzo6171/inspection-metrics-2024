@@ -6,20 +6,24 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "./lib/auth";
 import LoginPage from "./pages/login";
 import Dashboard from "./pages/dashboard";
+import LandingPage from "./pages/landing";
+import AIAssistant from "@/components/ai-assistant";
 
 function Router() {
   const { isAuthenticated } = useAuth();
 
-  if (!isAuthenticated) {
-    return <LoginPage />;
-  }
-
   return (
-    <Switch>
-      <Route path="/" component={Dashboard} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route component={Dashboard} />
-    </Switch>
+    <>
+      <Switch>
+        <Route path="/" component={LandingPage} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/dashboard">
+          {isAuthenticated ? <Dashboard /> : <LoginPage />}
+        </Route>
+        <Route component={LandingPage} />
+      </Switch>
+      {isAuthenticated && <AIAssistant />}
+    </>
   );
 }
 

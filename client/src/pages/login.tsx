@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useAuth } from "@/lib/auth";
-import { User, Lock, LogIn, AlertCircle } from "lucide-react";
+import { User, Lock, LogIn, AlertCircle, ArrowLeft } from "lucide-react";
 import policeBadge from "@assets/R-removebg-preview_1753188946424.png";
 
 export default function LoginPage() {
+  const [, setLocation] = useLocation();
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const { login, loading } = useAuth();
@@ -34,10 +36,18 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
+        <Button
+          variant="ghost"
+          onClick={() => setLocation("/")}
+          className="text-white hover:text-blue-400 mb-4"
+        >
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          Voltar para Landing Page
+        </Button>
         <div className="text-center">
-          <img 
-            src={policeBadge} 
-            alt="Brasão Polícia Civil BA" 
+          <img
+            src={policeBadge}
+            alt="Brasão Polícia Civil BA"
             className="mx-auto h-20 w-auto"
           />
           <h2 className="mt-6 text-2xl font-bold text-white leading-tight">

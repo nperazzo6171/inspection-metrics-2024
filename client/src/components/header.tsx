@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/auth";
-import { BarChart3, Clock, CheckCircle, LogOut, FileText, Building2, Scale, Shield, Zap, Package, Car, Users, Target, AlertTriangle, Gavel, FileCheck, Clock3, UserCheck } from "lucide-react";
+import { BarChart3, Clock, CheckCircle, LogOut, FileText, Building2, Scale, Shield, Zap, Package, Car, Users, Target, AlertTriangle, Gavel, FileCheck, Clock3, UserCheck, Map, Activity, Lock } from "lucide-react";
 import policeBadge from "@assets/R-removebg-preview_1753188946424.png";
 
 interface HeaderProps {
@@ -13,10 +13,14 @@ export default function Header({ activeTab, onTabChange }: HeaderProps) {
 
   const tabs = [
     { id: 'dashboard', label: 'Dashboard Geral', icon: BarChart3 },
+    { id: 'mapa-interativo', label: 'Mapa Interativo', icon: Map },
+    { id: 'cvli', label: 'CVLI', icon: Activity },
     { id: 'reports', label: 'Relatórios', icon: FileText },
     { id: 'unidade', label: 'Relatório por Unidade', icon: Building2 },
     { id: 'deadlines', label: 'Prazos', icon: Clock },
-    { id: 'status-regularizacao', label: 'Status Regularização', icon: Clock },
+    { id: 'status-regularizacao', label: 'Status Regularização', icon: CheckCircle },
+    { id: 'cadeia-custodia', label: 'Cadeia de Custódia', icon: Lock },
+    { id: 'carceragens', label: 'Carceragens Interditadas', icon: Building2 },
     { id: 'normalization', label: 'Normalização', icon: CheckCircle },
     { id: 'docs-legais', label: 'Documentos Legais', icon: Scale },
     { id: 'armas-apreendidas', label: 'Armas Apreendidas', icon: Zap },
