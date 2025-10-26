@@ -32,6 +32,8 @@ export interface IStorage {
 }
 
 export class DatabaseStorage implements IStorage {
+  private inMemoryInspections: Inspection[] = [];
+
   constructor() {
     if (process.env.DATABASE_URL) {
       this.initializeAdminUser();
@@ -182,16 +184,16 @@ export class DatabaseStorage implements IStorage {
 
   async getAllInspections(): Promise<Inspection[]> {
     if (!process.env.DATABASE_URL) {
-      return [];
+      return [...this.inMemoryInspections];
     }
     return await db.select().from(inspections);
   }
 
   async getInspectionsByFilters(filters: any): Promise<Inspection[]> {
     if (!process.env.DATABASE_URL) {
-      return [];
+      return this.filterInMemoryInspections(filters);
     }
-    
+
     const conditions = [];
     
     if (filters.unidade && filters.unidade.length > 0) {
@@ -228,8 +230,73 @@ export class DatabaseStorage implements IStorage {
     if (conditions.length > 0) {
       return await db.select().from(inspections).where(and(...conditions));
     }
-    
+
     return await db.select().from(inspections);
+  }
+
+  private filterInMemoryInspections(filters: any): Inspection[] {
+    if (this.inMemoryInspections.length === 0) {
+      return [];
+    }
+
+    const ensureArray = (value: unknown): string[] => {
+      return Array.isArray(value) ? value : [];
+    };
+
+    const toDate = (value: Date | string | null | undefined): Date | null => {
+      if (!value) {
+        return null;
+      }
+
+      if (value instanceof Date) {
+        return value;
+      }
+
+      const parsed = new Date(value);
+      return Number.isNaN(parsed.getTime()) ? null : parsed;
+    };
+
+    const unidadeFilter = ensureArray(filters?.unidade);
+    const departamentoFilter = ensureArray(filters?.departamento);
+    const naoConformidadeFilter = ensureArray(filters?.naoConformidade);
+    const anoFilter = filters?.ano ? Number(filters.ano) : null;
+    const dataInicial = toDate(filters?.dataInicial);
+    const dataFinal = toDate(filters?.dataFinal);
+    const statusPrazoFilter = filters?.statusPrazo ?? null;
+
+    return this.inMemoryInspections.filter((inspection) => {
+      if (unidadeFilter.length > 0 && !unidadeFilter.includes(inspection.unidadeInspecionada)) {
+        return false;
+      }
+
+      if (departamentoFilter.length > 0 && !departamentoFilter.includes(inspection.departamento)) {
+        return false;
+      }
+
+      if (naoConformidadeFilter.length > 0 && !naoConformidadeFilter.includes(inspection.naoConformidade)) {
+        return false;
+      }
+
+      const inspectionDate = toDate(inspection.dataInspecao);
+
+      if (anoFilter !== null && inspectionDate?.getUTCFullYear() !== anoFilter) {
+        return false;
+      }
+
+      if (dataInicial && inspectionDate && inspectionDate < dataInicial) {
+        return false;
+      }
+
+      if (dataFinal && inspectionDate && inspectionDate > dataFinal) {
+        return false;
+      }
+
+      if (statusPrazoFilter && inspection.statusPrazo !== statusPrazoFilter) {
+        return false;
+      }
+
+      return true;
+    });
   }
 
   async createInspection(insertInspection: InsertInspection): Promise<Inspection> {
